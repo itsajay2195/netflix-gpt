@@ -50,8 +50,6 @@ const Login = () => {
                 photoURL: currentUser?.photoURL,
               })
             );
-
-            navigate("/browse");
           });
           // ...
         })
@@ -84,7 +82,6 @@ const Login = () => {
               photoURL: currentUser?.photoURL,
             })
           );
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;

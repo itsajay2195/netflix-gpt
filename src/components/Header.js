@@ -1,21 +1,39 @@
-import { signOut } from "firebase/auth";
-import React from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
-import { removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSignout = () => {
     signOut(auth).then(() => {
-      navigate("/");
       dispatch(removeUser());
     });
   };
   const userInfo = useSelector((state) => state.user);
   console.log("userInfo is", userInfo);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          addUser({
+            uid: user?.uid,
+            email: user?.email,
+            displayName: user?.displayName,
+            photoURL: user?.photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
 
   return (
     <div className="flex justify-between absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen ">
