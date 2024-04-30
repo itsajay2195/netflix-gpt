@@ -2,6 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 
@@ -17,7 +18,7 @@ const Header = () => {
   console.log("userInfo is", userInfo);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    let unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(
           addUser({
@@ -33,15 +34,15 @@ const Header = () => {
         navigate("/");
       }
     });
+    return () => {
+      //unsubsribe when the component unmounts
+      unsubscribe();
+    };
   }, []);
 
   return (
     <div className="flex justify-between absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen ">
-      <img
-        className="w-20"
-        src="https://variety.com/wp-content/uploads/2019/03/netflix-logo-n-icon.png?w=1000&h=563&crop=1"
-        alt="Logo"
-      />
+      <img className="w-20" src={LOGO} alt="Logo" />
 
       {userInfo && (
         <div className="flex p-2 ">

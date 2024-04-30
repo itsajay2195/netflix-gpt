@@ -10,6 +10,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { DEFAULT_USER_AVTAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -39,7 +40,7 @@ const Login = () => {
           console.log(user);
           updateProfile(user, {
             displayName: name?.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/47854133?v=4",
+            photoURL: DEFAULT_USER_AVTAR,
           }).then(() => {
             const currentUser = auth.currentUser;
             dispatch(
