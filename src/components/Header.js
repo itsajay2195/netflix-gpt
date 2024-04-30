@@ -15,7 +15,6 @@ const Header = () => {
     });
   };
   const userInfo = useSelector((state) => state.user);
-  console.log("userInfo is", userInfo);
 
   useEffect(() => {
     let unsubscribe = onAuthStateChanged(auth, (user) => {
