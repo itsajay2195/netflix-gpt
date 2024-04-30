@@ -1,6 +1,15 @@
 import React, { useRef, useState } from "react";
 import { checkValidData } from "../utils/Valdiate";
 import Header from "./Header";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -8,12 +17,81 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleBtnClick = () => {
     //validate the fields data
 
     let result = checkValidData(email.current.value, password.current.value);
+
     if (result) {
       setErrorMessage(result);
+    } else if (!result && isSignUp) {
+      //signup logic
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          updateProfile(user, {
+            displayName: name?.current?.value,
+            photoURL: "https://avatars.githubusercontent.com/u/47854133?v=4",
+          }).then(() => {
+            const currentUser = auth.currentUser;
+            dispatch(
+              addUser({
+                uid: currentUser?.uid,
+                email: currentUser?.email,
+                displayName: currentUser?.displayName,
+                photoURL: currentUser?.photoURL,
+              })
+            );
+
+            navigate("/browse");
+          });
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + errorMessage);
+          // ..
+        });
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+
+          // ...
+        })
+        .then(() => {
+          const currentUser = auth.currentUser;
+          dispatch(
+            addUser({
+              uid: currentUser?.uid,
+              email: currentUser?.email,
+              displayName: currentUser?.displayName,
+              photoURL: currentUser?.photoURL,
+            })
+          );
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + errorMessage);
+          // ..
+        });
     }
   };
   return (
