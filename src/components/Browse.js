@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useNowPlayingMovies from "../hooks/useNowPlayinghooks";
-import SecondaryContainer from "./ChildContainer";
+import SecondaryContainer from "./SecondaryComponent";
 import Header from "./Header";
 import Maincontainer from "./Maincontainer";
 
@@ -9,10 +9,10 @@ const Browse = () => {
   useNowPlayingMovies();
 
   return (
-    <div>
+    <div className="bg-black">
       <Header />
       <Maincontainer />
-      {/* <SecondaryContainer /> */}
+      <SecondaryContainer />
     </div>
   );
 };
