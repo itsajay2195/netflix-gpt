@@ -3,11 +3,13 @@ import useNowPlayingMovies from "../hooks/useNowPlayinghooks";
 import SecondaryContainer from "./SecondaryComponent";
 import Header from "./Header";
 import Maincontainer from "./Maincontainer";
+import useFetchTrendingHook from "../hooks/useFetchTrendingHook";
+import useFetchPopularHook from "../hooks/useFetchPopular";
 
 const Browse = () => {
-  const [movies, setMovies] = useState([]);
   useNowPlayingMovies();
-
+  useFetchTrendingHook();
+  useFetchPopularHook();
   return (
     <div className="bg-black">
       <Header />
