@@ -5,16 +5,28 @@ import Header from "./Header";
 import Maincontainer from "./Maincontainer";
 import useFetchTrendingHook from "../hooks/useFetchTrendingHook";
 import useFetchPopularHook from "../hooks/useFetchPopular";
+import GptSearch from "./GptSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
+  const showGptSearchView = useSelector(
+    (state) => state?.gpt?.showGptSearchView
+  );
   useNowPlayingMovies();
   useFetchTrendingHook();
   useFetchPopularHook();
+
   return (
     <div className="bg-black">
       <Header />
-      <Maincontainer />
-      <SecondaryContainer />
+      {showGptSearchView ? (
+        <GptSearch />
+      ) : (
+        <>
+          <Maincontainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

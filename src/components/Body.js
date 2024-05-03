@@ -17,6 +17,10 @@ const Body = () => {
       path: "/browse",
       element: <Browse />,
     },
+    {
+      path: "/gptSearch",
+      element: <Browse />,
+    },
   ]);
 
   return (

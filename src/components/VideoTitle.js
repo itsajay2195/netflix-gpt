@@ -1,8 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faInfo } from "@fortawesome/free-solid-svg-icons";
+import { LANG } from "../utils/constants";
 
-const VideoTitle = ({ title, overview }) => {
+const VideoTitle = ({ title, overview, selectedLang }) => {
   return (
     <div className="w-screen aspect-video pt-[15%] px-8 absolute text-white bg-gradient-to-r from-black ">
       <h1 className="text-6xl font-bold">{title}</h1>
@@ -16,7 +17,7 @@ const VideoTitle = ({ title, overview }) => {
               icon={faPlay}
               style={{ color: "black", marginRight: 10 }}
             />
-            Play
+            {LANG[selectedLang?.label?.trim()].play}
           </button>
         </div>
         <div className="flex items-center">
@@ -45,7 +46,7 @@ const VideoTitle = ({ title, overview }) => {
               />
             </div>
             <div>
-              <span>More info</span>
+              <span> {LANG[selectedLang?.label?.trim()].moreInfo}</span>
             </div>
           </button>
         </div>

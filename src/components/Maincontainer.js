@@ -8,6 +8,10 @@ const Maincontainer = () => {
     (state) => state.movies?.nowPlayingMovies
   );
 
+  const selectedLang = useSelector(
+    (state) => state?.language?.selectedLanguage
+  );
+
   if (nowPlayingMovies?.length == 0) return;
 
   const mainMovie = nowPlayingMovies?.[1];
@@ -15,7 +19,11 @@ const Maincontainer = () => {
 
   return (
     <div>
-      <VideoTitle title={original_title} overview={overview} />
+      <VideoTitle
+        title={original_title}
+        overview={overview}
+        selectedLang={selectedLang}
+      />
       <VideoBackground movieId={id} />
     </div>
   );
