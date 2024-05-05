@@ -7,8 +7,7 @@ export const FETCH_API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYWY4OWQwOTkzZjQ4NmMwODU0NzNmNzI4MDY1YTdhOCIsInN1YiI6IjY2MzBmZmViNmFhOGUwMDEyMzFkYWViMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QCN-tuXMoVo_Ef9hSCfAGWf09g9d0CrV_Lb4yhyy8TI",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -55,3 +54,5 @@ export const LANG = {
     search: "Search",
   },
 };
+
+export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
