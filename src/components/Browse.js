@@ -17,7 +17,7 @@ const Browse = () => {
   useFetchPopularHook();
 
   return (
-    <div className="bg-black">
+    <div className="bg-black min-h-screen">
       <Header />
       {showGptSearchView ? (
         <GptSearch />

@@ -84,7 +84,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between absolute px-8 py-2 bg-gradient-to-l from-black z-10 w-screen ">
+    <div className="flex justify-between absolute z-100 px-8 py-2 bg-gradient-to-l from-black z-10 w-screen ">
       <img className="w-20" src={LOGO} alt="Logo" />
 
       <div className="flex p-2">
@@ -111,7 +111,7 @@ const Header = () => {
               }
             />
             <button onClick={handleSignout} className="font-bold text-white">
-              {LANG[selectedLang?.label?.trim()].signOut}
+              {LANG[selectedLang?.label?.trim()]?.signOut}
             </button>
           </div>
         )}

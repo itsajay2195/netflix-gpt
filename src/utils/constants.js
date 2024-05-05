@@ -14,6 +14,9 @@ export const FETCH_API_OPTIONS = {
 
 export const IMG_CONSTANT = "https://image.tmdb.org/t/p/w500/";
 
+export const OPEN_AI_KEY =
+  "sk-proj-15kT1FN2bDG9lRRcUOI5T3BlbkFJ9ziCWxrXEKtqeLt3MFck";
+
 export const LANGUAGE_CONSTANTS = [
   { label: "en", value: "English" },
   { label: "hindi", value: "हिंदी" },

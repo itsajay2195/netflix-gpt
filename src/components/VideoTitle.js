@@ -17,7 +17,7 @@ const VideoTitle = ({ title, overview, selectedLang }) => {
               icon={faPlay}
               style={{ color: "black", marginRight: 10 }}
             />
-            {LANG[selectedLang?.label?.trim()].play}
+            {LANG[selectedLang?.label?.trim()]?.play}
           </button>
         </div>
         <div className="flex items-center">
@@ -46,7 +46,7 @@ const VideoTitle = ({ title, overview, selectedLang }) => {
               />
             </div>
             <div>
-              <span> {LANG[selectedLang?.label?.trim()].moreInfo}</span>
+              <span> {LANG[selectedLang?.label?.trim()]?.moreInfo}</span>
             </div>
           </button>
         </div>
